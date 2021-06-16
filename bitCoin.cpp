@@ -14,9 +14,7 @@ struct pr{
     int i;
     int j;
     string psf;  //path so far 
-
     pr(int a,int b,string c):i(a),j(b),psf(c){}
-
 };
 
 void read_record(map<string,vector<string>>& mp,map<string,pair<int,int>>& id_f_w,map<string,bool>& came_or_not){
@@ -97,6 +95,8 @@ int main(){
         arrange_record(arranged,mp,id_f_w,came_or_not,it1);
     }
     /*
+    //printing parent and its children
+
     for(auto it = mp.begin(); it != mp.end() ; it++){
         cout<<it->first<<"::";
         for(auto it1 = it->second.begin(); it1 != it->second.end() ; it1++){
@@ -106,11 +106,13 @@ int main(){
     }
     cout<<endl;
 
+    //printing tx_id with fee and price
     for(auto i = id_f_w.begin(); i != id_f_w.end() ; i++){
         cout<<i->first<<"::"<<i->second.first<<" "<<i->second.second<<endl;
     }
     cout <<endl;
 
+    //arraged array
     for (auto it = arranged.begin() ; it != arranged.end() ; it++){
         cout<<it->first<<" "<<it->second.first<<" "<<it->second.second<<endl;
     }
@@ -148,6 +150,7 @@ int main(){
     //finding answer in every weight if previous weight didn't give the answer
     for(int i = weight ; i >= 0 ; i--){
         //finding valid
+
         //using bfs for every weight
         bool isValid = true;
         queue<pr> q;
@@ -196,10 +199,11 @@ int main(){
                     break;
                 }
             }else {
-                int exc = dp[rem.i - 1][rem.j];
+                int exc = dp[rem.i - 1][rem.j]; //excluding the item
 
                 if (rem.j >= arranged[rem.i-1].second.second){
-                    int inc = dp[rem.i - 1][rem.j - arranged[rem.i-1].second.second] + arranged[rem.i-1].second.first;
+                    //including the item
+                    int inc = dp[rem.i - 1][rem.j - arranged[rem.i-1].second.second] + arranged[rem.i-1].second.first; 
                     if (dp[rem.i][rem.j] == inc){
                         q.push(pr(rem.i-1,rem.j - arranged[rem.i-1].second.second,arranged[rem.i - 1].first + " " + rem.psf));
                     }
