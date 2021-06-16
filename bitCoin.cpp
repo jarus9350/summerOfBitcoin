@@ -170,6 +170,8 @@ int main(){
                 isValid = true;
                 vector<string> psf;
                 set<string,greater<string>> pppOrNot; //previous parents present or not
+
+                //this loop for  find if the current line is valid or not
 		        while (getline(s, word,' ')) {
                     psf.push_back(word);
                     pppOrNot.insert(word);
